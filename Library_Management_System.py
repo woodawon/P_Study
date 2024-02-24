@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from typing import List 
+import sys
 
 # Python에서의 struct(구조체)는? -> StructedArray 
 # -> Numpy 라이브러리를 사용해 구현할 수 있다.
@@ -16,13 +17,13 @@ library.author = []
 library.pages = []
 library.price = []
 
-ar_nm = []
-bk_nm = []
+ar_nm = '' # 저자 이름
 
 # 사용자 수, 서비스 선택, 책 개수
 u = 0 
 number = '' 
 count = 0  
+check = 0
 
 while(number != '5'):
     print("Welcome to Library! \n")
@@ -39,12 +40,27 @@ while(number != '5'):
             library.author.append(input("Enter author name : "))
             library.pages.append(int(input("Enter Pages : ")))
             library.price.append(float(input("Enter price : ")))
+            count += 1
         case '2':
-            print("Fizz")
+            print("Okay. You have entered the following information \n")
+            for i in range(count):
+                print(f"book name : {library.book_name[i]}")
+                print(f"\t author name : {library.author[i]}")
+                print(f"\t pages : {library.pages[i]}")
+                print(f"\t price : {library.price[i]}")
         case '3':
-            print("Buzz")
+            ar_nm = input("Enter author name : ")
+            for i in range(count):
+                if ar_nm == library.author[i]:
+                    print(library.book_name[i], library.author[i], library.pages[i], library.price[i], "\n")
+                    check += 1
+            if(check != 1):
+                print("No results! Please try again.")  
         case '4':
-            print("Buzz")
+            if count != 0:
+                print(count)
+            else:
+                print("No of books in library \n")
         case '5':
             sys.exit("Program is End.")
 
